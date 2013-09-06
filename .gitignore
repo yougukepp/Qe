@@ -1,0 +1,7 @@
+*.aux
+*.idx
+*.log
+document.pdf
+fig.pdf
+*.toc
+

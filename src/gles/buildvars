@@ -1,0 +1,28 @@
+#obj=IMX
+obj=X11
+
+CC_X11			= gcc
+LD_X11			= $(CC_X11)
+AR_X11			= ar
+CFLAGS_X11		= -std=c99 -DEGL_USE_X11 -Wall -pedantic
+LFLAGS_X11		= -Wl,-Bdynamic -L/usr/lib/i386-linux-gnu/mesa-egl/ -lm -lX11 -lEGL -lGLESv2
+
+CC_IMX			= arm-none-linux-gnueabi-gcc
+LD_IMX			= $(CC_IMX)
+AR_IMX			= arm-none-linux-gnueabi-ar
+CFLAGS_IMX		= -std=c99 -Wall -pedantic -I/home/lucid/todo/out/rootfs/usr/include
+LFLAGS_IMX		= -Wl,-Bdynamic -L/home/lucid/todo/out/rootfs/usr/lib/ -lEGL -lGLESv2 -lgsl-fsl
+
+ifeq ($(obj), IMX)
+    CC			= $(CC_IMX)
+    LD			= $(LD_IMX)
+    AR			= $(AR_IMX)
+    CFLAGS		= $(CFLAGS_IMX)
+    LFLAGS 		= $(LFLAGS_IMX)
+else 
+    CC			= $(CC_X11)
+    LD			= $(LD_X11)
+    AR			= $(AR_X11)
+    CFLAGS		= $(CFLAGS_X11)
+    LFLAGS	   	= $(LFLAGS_X11)
+endif
